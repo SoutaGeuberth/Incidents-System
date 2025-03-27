@@ -1,0 +1,53 @@
+@model NeoTecnologias.Models.Ticket
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Detalles de la Incidencia</h2>
+
+<p><strong>Título:</strong> @Model.Title</p>
+<p><strong>Descripción:</strong> @Model.Description</p>
+<p><strong>Estado:</strong> @Model.Status</p>
+<p><strong>Prioridad:</strong> @Model.Priority</p>
+<p><strong>Usuario que reporta:</strong> @Model.User.Name</p>
+<p><strong>Técnico asignado:</strong> @Model.Technician.Name</p>
+<p><strong>Fecha de Creación:</strong> @Model.CreationDate.ToString("dd/MM/yyyy")</p>
+<p><strong>Última Actualización:</strong> @Model.LastModifiedDate.ToString("dd/MM/yyyy")</p>
+<h3>Comentarios</h3>
+<ul id="listaComentarios">
+    @foreach (var comment in Model.Comments)
+    {
+        <li>@comment.Text- <small>@comment.CreationDate.ToString("dd/MM/yyyy HH:mm")</small></li>
+    }
+</ul>
+
+<textarea id="comentarioTexto" class="form-control" rows="3" placeholder="Añadir comentario"></textarea>
+<button id="btnAgregarComentario" class="btn btn-primary mt-2">Agregar Comentario</button>
+
+<script>
+    $("#btnAgregarComentario").click(function () {
+        var text = $("#comentarioTexto").val();
+        var ticketId = @Model.Id;
+        console.log(ticketId);
+
+        if (text.trim() !== "") {
+            $.post("@Url.Action("AddComment", "Comments")",
+                { ticketId: @Model.Id, text: text },
+                function (data) {
+                    if (data.success) {
+                        $("#listaComentarios").append(`<li>${data.text} - <small>${data.creationDate}</small></li>`);
+                        $("#comentarioTexto").val('');
+                    } else {
+                        alert("Error: " + data.message);
+                    }
+                }
+            );
+        } else {
+            alert("Por favor, ingresa un comentario válido.");
+        }
+    });
+</script>
+
+

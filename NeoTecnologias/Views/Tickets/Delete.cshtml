@@ -1,0 +1,16 @@
+@model NeoTecnologias.Models.Ticket
+
+
+<h2>Eliminar Incidencia</h2>
+
+<div class="alert alert-danger">
+    <p>¿Estás seguro de que deseas eliminar esta incidencia?</p>
+    <p><strong>Título:</strong> @Model.Title</p>
+    <p><strong>Descripción:</strong> @Model.Description</p>
+</div>
+
+<form method="post">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+</form>
