@@ -3,7 +3,7 @@
 
 Hola!. Soy Geuberth y te daré una breve introducción al como se desarrolló, implemento y se luchó por el correcto funcionamiento de un sistema de incidencias sencillo pero primeramente explicaré como instalar las dependencias necesarias.
 
-    1. Descomprimir *NeoTecnologias.rar*
+    1. Descomprimir *NeoTecnologias.rar* o clonar este repositorio
     2. Abrir NeoTecnologias.sln con el uso de Visual Studio 2022
     3. Instalar los paquetes necesarios para su funcionamiento listados en *Installation*
     4. Tener SQL Server Express con autenticación por windows para la conexión a la base de datos
